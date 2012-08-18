@@ -1,15 +1,13 @@
 require 'velcro/version'
 require 'velcro/homebrew'
-require 'velcro/brewfile'
-require 'velcro/lockfile'
 
 class Velcro
-  attr_accessor :homebrew
+  attr_accessor :homebrew, :brewfile, :lockfile
 
   def initialize
-    self.homebrew = stub
-    self.brewfile = stub
-    self.lockfile = stub
+    self.homebrew = Homebrew.new
+    self.brewfile = nil
+    self.lockfile = nil
   end
 
   def install
