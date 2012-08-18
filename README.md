@@ -1,29 +1,57 @@
 # Velcro
 
-TODO: Write a gem description
+Manage your dependencies with homebrew like you manage your gems with
+bundler.
 
-## Installation
+## Getting Started
 
-Add this line to your application's Gemfile:
+1. Install the gem
 
-    gem 'velcro'
+   ```bash
+   gem install velcro
+   ```
 
-And then execute:
+2. Open up a project and install dependencies
 
-    $ bundle
+   ```bash
+   velcro install
+   ```
 
-Or install it yourself as:
+   If this is the first time you are installing the project a `Brewfile`
+   and `Brewfile.lock` will be generated.
 
-    $ gem install velcro
+3. Update a dependency to the most recent version
 
-## Usage
+   ```bash
+   velcro update redis
+   ```
 
-TODO: Write usage instructions here
+   This will update the version in the `Brewfile.lock`.
 
-## Contributing
+## Give Back
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+1. Fork it:
+
+   https://help.github.com/articles/fork-a-repo
+
+2. Create your feature branch:
+
+   ```bash
+   git checkout -b fixes_horrible_spelling_errors
+   ```
+
+3. Commit your changes:
+
+   ```bash
+   git commit -am 'Really? You spelled application as "applickachon"?'
+   ```
+
+4. Push the branch:
+
+   ```bash
+   git push origin fixes_horrible_spelling_errors
+   ```
+
+5. Create a pull request:
+
+   https://help.github.com/articles/using-pull-requests
