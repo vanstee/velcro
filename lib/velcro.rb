@@ -4,9 +4,9 @@ require 'velcro/homebrew'
 class Velcro
   attr_accessor :homebrew, :brewfile, :lockfile
 
-  def initialize
+  def initialize(path)
     self.homebrew = Homebrew.new
-    self.brewfile = nil
+    self.brewfile = Brewfile.new(path)
     self.lockfile = nil
   end
 
