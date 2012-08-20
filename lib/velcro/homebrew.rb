@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class Velcro
   class Homebrew
     HOMEBREW_COMMAND = 'brew'
@@ -14,8 +16,28 @@ class Velcro
       shellout(command)
     end
 
-    def shellout(command)
-      system(command)
+    def child_dependencies(dependency)
+      deps(dependency).split.map do |child|
+        child = OpenStruct.new(name: child)
+        child.version = versions(child).split.first
+        child
+      end
+    end
+
+    def deps(dependency)
+      command = "#{HOMEBREW_COMMAND} deps #{dependency.name}"
+      shellout(command, true)
+    end
+
+    def versions(dependency)
+      command = "#{HOMEBREW_COMMAND} versions --compact #{dependency.name}"
+      shellout(command, true)
+    end
+
+    def shellout(command, quiet = false)
+      output = `#{command}`
+      puts output unless quiet
+      output
     end
   end
 end

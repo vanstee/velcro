@@ -1,7 +1,7 @@
 require 'velcro'
 
 describe Velcro do
-  subject { described_class.new }
+  subject { described_class.new(stub) }
 
   context '#install' do
     let(:homebrew) { stub(install_dependencies: nil) }

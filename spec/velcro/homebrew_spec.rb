@@ -4,11 +4,15 @@ require 'ostruct'
 describe Velcro::Homebrew do
   subject { described_class.new }
 
-  context 'installing dependencies' do
-    let(:postgresql) { OpenStruct.new(name: 'postgresql') }
-    let(:redis)      { OpenStruct.new(name: 'redis') }
-    let(:dependencies) { [postgresql, redis] }
+  let(:postgresql) { OpenStruct.new(name: 'postgresql') }
+  let(:redis)      { OpenStruct.new(name: 'redis') }
+  let(:dependencies) { [postgresql, redis] }
 
+  before do
+    subject.stub(:shellout) { nil }
+  end
+
+  context 'installing dependencies' do
     describe '#install_dependencies' do
       it 'installs the dependencies' do
         subject.should_receive(:install).with(postgresql)

@@ -4,11 +4,14 @@ class Velcro
   class Brewfile
     DEPENDENCY_FORMAT = %r{^brew '(?<name>\S*)'(, '(?<version>\S*)')?$}
 
-    attr_accessor :path, :dependencies
+    attr_accessor :path
 
     def initialize(path)
       self.path = path
-      self.dependencies = parse_dependencies(content)
+    end
+
+    def dependencies
+      parse_dependencies(content)
     end
 
     def parse_dependencies(content)
