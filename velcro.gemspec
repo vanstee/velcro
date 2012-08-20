@@ -4,11 +4,11 @@ require File.expand_path('../lib/velcro/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.name          = 'velcro'
   gem.version       = Velcro::VERSION
-  gem.authors       = ['vanstee']
+  gem.authors       = ['vanstee', 'tomelm']
   gem.email         = ['vanstee@highgroove.com']
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ''
+  gem.description   = %q{Manage your dependencies with homebrew like you manage your gems with bundler}
+  gem.summary       = %q{Manage your dependencies with homebrew like you manage your gems with bundler}
+  gem.homepage      = 'http://github.com/vanstee/velcro'
 
   gem.files         = `git ls-files`.split
   gem.executables   = `git ls-files -- bin/*`.split.map { |f| File.basename(f) }
