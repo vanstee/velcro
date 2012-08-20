@@ -1,6 +1,6 @@
 # Velcro
 
-![Test Status](https://secure.travis-ci.org/vanstee/velcro.png?branch=master)
+[![Build Status](https://secure.travis-ci.org/vanstee/velcro.png?branch=master)](http://travis-ci.org/vanstee/velcro)
 
 Manage your dependencies with homebrew like you manage your gems with
 bundler.
