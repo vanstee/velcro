@@ -22,7 +22,7 @@ describe Velcro::Brewfile do
     ]
   }
 
-  subject { described_class.new(file.path) }
+  subject { described_class.new }
 
   describe '#parse' do
     it 'parses the Brewfile' do

@@ -6,10 +6,10 @@ require 'velcro/lockfile'
 class Velcro
   attr_accessor :homebrew, :brewfile, :lockfile
 
-  def initialize(path)
+  def initialize
     self.homebrew = Homebrew.new
-    self.brewfile = Brewfile.new(path)
-    self.lockfile = Lockfile.new(path)
+    self.brewfile = Brewfile.new
+    self.lockfile = Lockfile.new
   end
 
   def install

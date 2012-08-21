@@ -2,10 +2,9 @@ require 'velcro/homebrew'
 
 class Velcro
   class Lockfile
-    attr_accessor :path, :homebrew
+    attr_accessor :homebrew
 
-    def initialize(path)
-      self.path = path
+    def initialize
       self.homebrew = Homebrew.new
     end
 
