@@ -15,6 +15,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- spec/*`.split
   gem.require_paths = ['lib']
 
+  gem.add_dependency 'thor' , '~> 0.16.0'
+
   gem.add_development_dependency 'rspec', '~> 2.11.0'
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rake'
