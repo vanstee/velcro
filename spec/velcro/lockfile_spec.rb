@@ -1,4 +1,5 @@
 require 'velcro/lockfile'
+require 'tempfile'
 
 describe Velcro::Lockfile do
   subject { described_class.new }
@@ -11,15 +12,19 @@ describe Velcro::Lockfile do
   let(:dependencies) { [postgresql, redis] }
   let(:child_dependencies) { [ossp_uuid, readline] }
 
+  let(:lockfile) { Tempfile.new('lockfile') }
+
   before do
     subject.homebrew.stub(:child_dependencies).with(postgresql) { child_dependencies }
     subject.homebrew.stub(:child_dependencies).with(redis) { [] }
     subject.homebrew.stub(:versions).with(postgresql) { '9.1.4' }
+    subject.stub(:lockfile_in) { lockfile }
   end
 
   describe '#generate' do
     it 'creates a Brewfile.lock for the installed dependencies' do
-      subject.generate(dependencies).should == <<-END.gsub(/^ {8}/, '').rstrip
+      subject.generate(dependencies)
+      File.read(lockfile).should == <<-END.gsub(/^ {8}/, '')
         FORMULA
           postgresql (9.1.4)
             ossp-uuid (1.6.2)

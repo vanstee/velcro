@@ -1,7 +1,11 @@
+require 'velcro/errors'
+require 'velcro/file_helpers'
 require 'ostruct'
 
 class Velcro
   class Brewfile
+    include FileHelpers
+
     DEPENDENCY_FORMAT = %r{^brew '(?<name>\S*)'(, '(?<version>\S*)')?$}
 
     def dependencies
@@ -23,7 +27,15 @@ class Velcro
     end
 
     def content
-      File.read(self.path)
+      if location
+        File.read(brewfile_in(location))
+      else
+        fail BrewfileNotFound, 'Could not locate Brewfile'
+      end
+    end
+
+    def brewfile_in(directory)
+      File.join(directory, 'Brewfile')
     end
   end
 end

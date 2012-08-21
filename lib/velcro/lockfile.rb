@@ -1,7 +1,10 @@
+require 'velcro/file_helpers'
 require 'velcro/homebrew'
 
 class Velcro
   class Lockfile
+    include FileHelpers
+
     attr_accessor :homebrew
 
     def initialize
@@ -9,13 +12,18 @@ class Velcro
     end
 
     def generate(dependencies)
-      [
-        'FORMULA',
-        indent(generate_formula(dependencies)),
-        '',
-        'DEPENDENCIES',
-        indent(generate_dependencies(dependencies))
-      ].flatten.join("\n")
+      File.open(lockfile_in(Dir.pwd), 'w+') do |lockfile|
+        lockfile.write(
+          [
+            'FORMULA',
+            indent(generate_formula(dependencies)),
+            '',
+            'DEPENDENCIES',
+            indent(generate_dependencies(dependencies)),
+            ''
+          ].flatten.join("\n")
+        )
+      end
     end
 
     def generate_formula(dependencies)
@@ -49,6 +57,10 @@ class Velcro
       Array(lines).map do |line|
         "  #{line}"
       end
+    end
+
+    def lockfile_in(directory)
+      File.join(directory, 'Brewfile.lock')
     end
   end
 end
