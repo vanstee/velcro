@@ -4,19 +4,20 @@ describe Velcro do
   subject { described_class.new }
 
   context '#install' do
-    let(:homebrew) { stub(install_dependencies: nil) }
-    let(:dependencies) { stub }
+    let(:dependency) { stub(install!: nil) }
+    let(:dependencies) { [dependency] }
     let(:brewfile) { stub(dependencies: dependencies) }
     let(:lockfile) { stub(generate: nil) }
 
     before do
-      subject.stub(:homebrew) { homebrew }
       subject.stub(:brewfile) { brewfile }
       subject.stub(:lockfile) { lockfile }
     end
 
     it 'installs the necessary dependencies' do
-      homebrew.should_receive(:install_dependencies).with(dependencies)
+      dependencies.each do |dependency|
+        dependency.should_receive(:install!)
+      end
 
       subject.install
     end

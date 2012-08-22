@@ -1,6 +1,5 @@
 require 'velcro/brewfile'
 require 'velcro/errors'
-require 'velcro/homebrew'
 require 'velcro/lockfile'
 require 'velcro/version'
 
@@ -15,10 +14,9 @@ unless ENV['TRAVIS']
 end
 
 class Velcro
-  attr_accessor :homebrew, :brewfile, :lockfile
+  attr_accessor :brewfile, :lockfile
 
   def initialize
-    self.homebrew = Homebrew.new
     self.brewfile = Brewfile.new
     self.lockfile = Lockfile.new
   end
@@ -29,7 +27,7 @@ class Velcro
   end
 
   def install_dependencies
-    homebrew.install_dependencies(brewfile.dependencies)
+    brewfile.dependencies.each(&:install!)
   end
 
   def generate_lockfile
