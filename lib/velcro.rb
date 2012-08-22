@@ -1,7 +1,18 @@
-require 'velcro/version'
-require 'velcro/homebrew'
 require 'velcro/brewfile'
+require 'velcro/errors'
+require 'velcro/homebrew'
 require 'velcro/lockfile'
+require 'velcro/version'
+
+$:.unshift('/usr/local/Library/Homebrew')
+
+unless ENV['TRAVIS']
+  begin
+    require 'global'
+  rescue LoadError
+    fail Velcro::HomebrewNotFound, 'Please install homebrew before using velcro: http://mxcl.github.com/homebrew'
+  end
+end
 
 class Velcro
   attr_accessor :homebrew, :brewfile, :lockfile
